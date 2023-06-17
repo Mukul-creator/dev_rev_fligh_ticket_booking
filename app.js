@@ -1,7 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 
-const mongo = require("./connection");
+const mongo = require("./api/db/connection");
 
 const app = express();
 
@@ -25,6 +25,7 @@ app.use((req, res, next) => {
   }
   next();
 });
+
 
 app.use("/api", require("./api/routes/index"));
 

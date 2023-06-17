@@ -1,4 +1,6 @@
 module.exports = {
-    user: require("./user"),
-    flight: require("./flight")
+    user: require("./schema/user"),
+    flight: require("./schema/flight"),
+    booking: require('./schema/booking')
+    
 }

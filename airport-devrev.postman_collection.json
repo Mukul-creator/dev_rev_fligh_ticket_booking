@@ -1,0 +1,493 @@
+{
+	"info": {
+		"_postman_id": "e4d42896-a3b5-4a95-affb-63abab38992b",
+		"name": "airport-devrev",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6191530"
+	},
+	"item": [
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "add flight",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"airline\": \"JET Airways\",\n    \"flightNumber\": \"G8GE584\",\n    \"departure\": \"2023-06-16T07:23:38.247Z\",\n    \"arrival\": \"2023-06-16T09:23:38.249Z\",\n    \"departureAirport\": \"Chandigarh\",\n    \"arrivalAirport\": \"Delhi\",\n    \"price\": \"3200\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server-url}}/api/addflight",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"api",
+								"addflight"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove flight",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server-url}}/api/removeflight/648c1353446c55a374f5459d",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"api",
+								"removeflight",
+								"648c1353446c55a374f5459d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "flightData",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server-url}}/api/flightData/648c13ef11865d202919f7ff",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"api",
+								"flightData",
+								"648c13ef11865d202919f7ff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show flights(departureAirport, arrivalAirport, date, airline)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server-url}}/api/allflights?departureAirport=Chandigarh&arrivalAirport=Delhi&date=2023-06-20&passenger=2&airline=JET Airways",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"api",
+								"allflights"
+							],
+							"query": [
+								{
+									"key": "departureAirport",
+									"value": "Chandigarh"
+								},
+								{
+									"key": "arrivalAirport",
+									"value": "Delhi"
+								},
+								{
+									"key": "date",
+									"value": "2023-06-20"
+								},
+								{
+									"key": "passenger",
+									"value": "2"
+								},
+								{
+									"key": "airline",
+									"value": "JET Airways"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bookings By flightId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server-url}}/api/admin/bookings?flightId=648c139c4e6b05de2255cfab",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"bookings"
+							],
+							"query": [
+								{
+									"key": "flightId",
+									"value": "648c139c4e6b05de2255cfab"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bookings (all)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server-url}}/api/admin/bookings",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "SignUp",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"const tkn = jsonData.token;",
+									"console.log(tkn)",
+									"",
+									"postman.setEnvironmentVariable(\"token\", \"Bearer \" + tkn);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fullName\": \"Mayank\",\n    \"email\": \"mk@gmail.com\",\n    \"mobile\": \"1234512345\",\n    \"role\": \"admin\",\n    \"password\": \"mayank\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server-url}}/api/signup",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"api",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"const tkn = jsonData.token;",
+									"var BearerToken = \"Bearer \" + tkn",
+									"",
+									"postman.setEnvironmentVariable(\"token\", BearerToken);",
+									"console.log(BearerToken)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"mk@gmail.com\",\n    \"password\": \"mayank\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server-url}}/api/login",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "flightDetails",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server-url}}/api/flightDetails/648c13ef11865d202919f7ff",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"api",
+								"flightDetails",
+								"648c13ef11865d202919f7ff"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Booking",
+			"item": [
+				{
+					"name": "createBooking",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"noOfPassengers\": \"2\",\n    \"passengers\": [\n        { \"title\": \"Mr.\", \"firstName\": \"Mayank\", \"lastName\": \"Kumar\", \"age\": \"24\"},\n        { \"title\": \"Mr.\", \"firstName\": \"Mukul\", \"lastName\": \"Kumar\", \"age\": \"20\"}],\n    \"flight\": \"648d36d98f79b26a1f86dacb\"\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server-url}}/api/createbooking",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"api",
+								"createbooking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CanelBooking",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{server-url}}/api/cancelbooking/648d09d29e1f2ebe54557d59",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"api",
+								"cancelbooking",
+								"648d09d29e1f2ebe54557d59"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MyBookings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server-url}}/api/bookings",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"api",
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Booking",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server-url}}/api/booking/648d11b6dc2a0fac81b170a6",
+							"host": [
+								"{{server-url}}"
+							],
+							"path": [
+								"api",
+								"booking",
+								"648d11b6dc2a0fac81b170a6"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "show flights for user (departureAirport, arrivalAirport, date, passenger)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{server-url}}/api/flights?departureAirport=Chandigarh&arrivalAirport=Delhi&date=2023-06-20&passenger=2",
+					"host": [
+						"{{server-url}}"
+					],
+					"path": [
+						"api",
+						"flights"
+					],
+					"query": [
+						{
+							"key": "departureAirport",
+							"value": "Chandigarh"
+						},
+						{
+							"key": "arrivalAirport",
+							"value": "Delhi"
+						},
+						{
+							"key": "date",
+							"value": "2023-06-20"
+						},
+						{
+							"key": "passenger",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

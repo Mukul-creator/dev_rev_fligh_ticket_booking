@@ -6,7 +6,6 @@ require("dotenv").config();
 
 const db = require("../models/index");
 
-// const user = require("../models/user")
 
 exports.user_signup = async (req, res) => {
   try {
